@@ -1,0 +1,56 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "auh-realty-ontology"
+version = "0.1.0"
+description = "Cross-jurisdictional real estate ontology and analytical infrastructure."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+    { name = "Marc Jichi" },
+]
+dependencies = [
+    "pandas>=2.2",
+    "pydantic>=2.6",
+    "duckdb>=1.0",
+    "requests>=2.32",
+    "beautifulsoup4>=4.12",
+    "folium>=0.16",
+    "jupyter>=1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.5",
+    "mypy>=1.10",
+]
+scraping-heavy = [
+    "playwright>=1.44",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/auh_realty"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "SIM"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+ignore_missing_imports = true

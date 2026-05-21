@@ -138,7 +138,7 @@ Pydantic models in `src/auh_realty/ontology/entities.py`. The ontology evolves a
 
 ```python
 from pydantic import BaseModel, Field
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from typing import Literal
 from uuid import UUID, uuid4
 from decimal import Decimal
@@ -196,7 +196,7 @@ class Listing(BaseModel):
     listed_date: date
     agent_id: UUID | None = None
     status: Literal["active", "sold", "withdrawn", "unknown"] = "unknown"
-    scraped_at: datetime = Field(default_factory=datetime.utcnow)
+    scraped_at: datetime = Field(default_factory=lambda: datetime.now(UTC))
 
 
 class Transaction(BaseModel):
